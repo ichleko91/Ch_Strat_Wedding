@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<title>Χρήστος &amp; Στρατούλα · Οι στιγμές σας</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#fcf9f4">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #fcf9f4;
+    --ink: #34241a;
+    --soft: #7a6352;
+    --gold: #b08a5e;
+    --line: #e7dccd;
+  }
+  * { box-sizing: border-box; }
+  /* Google shows this page inside its own frames; phones there enlarge text and let the page
+     spill sideways. Turn the enlarging off and never allow sideways scrolling. */
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  html, body { touch-action: pan-y; } /* scroll up/down only: no pinch-zoom, no sideways drag */
+  html, body { margin: 0; width: 100%; max-width: 100%; overflow-x: hidden; background: var(--paper); color: var(--ink); }
+  body { font-family: 'Palatino Linotype', Palatino, 'Book Antiqua', 'Noto Serif', Georgia, serif; }
+  .page { width: 100%; max-width: 560px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+  main, .lead, .eyebrow, h1 { overflow-wrap: anywhere; }
+  .eyebrow { letter-spacing: .14em; }
+  img { max-width: 100%; }
+  .flowers { display: block; width: 100%; height: auto; }
+  .flowers.top { -webkit-mask-image: linear-gradient(#000 80%, transparent); mask-image: linear-gradient(#000 80%, transparent); }
+  .flowers.bottom { margin-top: auto; -webkit-mask-image: linear-gradient(transparent, #000 25%); mask-image: linear-gradient(transparent, #000 25%); }
+  main { padding: 0 24px; text-align: center; margin-top: -8px; }
+  .eyebrow { font-size: clamp(11px, 3.6vw, 14px); margin: 0 0 6px; }
+  h1 { font-style: italic; font-weight: 400; font-size: clamp(34px, 10vw, 48px); margin: 0 0 12px; line-height: 1.15; }
+  .lead { font-style: italic; font-size: 18px; line-height: 1.5; margin: 0 0 22px; color: var(--ink); }
+  .date { letter-spacing: .15em; font-size: 14px; color: var(--soft); margin: 0 0 22px; }
+
+  label.name { display: block; text-align: left; font-size: 14px; color: var(--soft); margin: 0 0 6px; }
+  input[type=text] {
+    width: 100%; font: inherit; font-size: 17px; padding: 12px 14px; border-radius: 12px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink); margin-bottom: 16px;
+  }
+  input[type=text]:focus { outline: 2px solid var(--gold); outline-offset: 1px; }
+
+  .btn {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    width: 100%; padding: 16px 18px; border-radius: 999px; font: inherit; font-size: 18px;
+    border: 1px solid var(--ink); cursor: pointer; transition: transform .15s, background .2s;
+  }
+  .btn:active { transform: scale(.98); }
+  .btn.pick { background: transparent; color: var(--ink); }
+  .btn.send { background: var(--ink); color: var(--paper); margin-top: 12px; }
+  .btn:disabled { opacity: .45; cursor: default; }
+  .btn svg { width: 22px; height: 22px; flex-shrink: 0; }
+  #files { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+
+  .list { list-style: none; padding: 0; margin: 18px 0 0; text-align: left; }
+  .item { padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+  .item .row { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .item .fname { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .item .state { color: var(--soft); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .item.ok .state { color: #4d7a4a; }
+  .item.err .state { color: #a3402f; }
+  .bar { height: 4px; background: var(--line); border-radius: 2px; margin-top: 6px; overflow: hidden; }
+  .bar i { display: block; height: 100%; width: 0; background: var(--gold); transition: width .3s; }
+
+  .note { font-size: 13px; color: var(--soft); line-height: 1.5; margin: 14px 0 0; }
+  .thanks { display: none; margin: 22px 0 0; }
+  .thanks p { font-style: italic; font-size: 20px; margin: 0 0 6px; }
+  .thanks.show { display: block; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <img class="flowers top" alt="" src="flowers-top.jpg" width="900" height="383">
+  <main>
+    <p class="eyebrow">ΜΟΙΡΑΣΤΕΙΤΕ ΤΙΣ ΣΤΙΓΜΕΣ ΣΑΣ</p>
+    <h1>Χρήστος &amp; Στρατούλα</h1>
+    <p class="lead">Στείλτε μας τις φωτογραφίες και τα βίντεο που τραβήξατε στον γάμο μας. Κάθε στιγμή μετράει για εμάς!</p>
+    <p class="date">24 · 07 · 2027</p>
+
+    <label class="name" for="guest">Το όνομά σας (προαιρετικό)</label>
+    <input type="text" id="guest" maxlength="40" autocomplete="name" placeholder="π.χ. Μαρία &amp; Γιώργος">
+
+    <input type="file" id="files" accept="image/*,video/*" multiple>
+    <label class="btn pick" for="files" id="pickBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="15" rx="2"/><circle cx="12" cy="12.5" r="3.5"/><path d="M8 5l1.5-2h5L16 5"/></svg>
+      Επιλογή φωτογραφιών &amp; βίντεο
+    </label>
+    <button class="btn send" id="sendBtn" disabled>Αποστολή</button>
+
+    <ul class="list" id="list"></ul>
+    <p class="note" id="note">Μην κλείσετε τη σελίδα μέχρι να ολοκληρωθεί η αποστολή. Για μεγάλα βίντεο προτιμήστε Wi-Fi.</p>
+
+    <div class="thanks" id="thanks" role="status">
+      <p>Ευχαριστούμε πολύ! ♡</p>
+      <span class="note">Μπορείτε να στείλετε κι άλλες, όποτε θέλετε.</span>
+    </div>
+  </main>
+  <img class="flowers bottom" alt="" src="flowers-bottom.jpg" width="900" height="323">
+</div>
+
+<script>
+// iPhones ignore user-scalable=no; block their pinch gesture directly.
+document.addEventListener('gesturestart', e => e.preventDefault(), { passive: false });
+
+// Chunk sizes must be multiples of 256 KiB (a Drive rule).
+const DIRECT_CHUNK = 16 * 1024 * 1024;     // browser -> Drive, the fast path
+const RELAY_CHUNK = 8 * 1024 * 1024;       // browser -> script -> Drive, the fallback
+const MAX_FILE = 5 * 1024 * 1024 * 1024;   // same limit as the server
+const TYPES = { jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', heic: 'image/heic', heif: 'image/heif', webp: 'image/webp', gif: 'image/gif', mp4: 'video/mp4', mov: 'video/quicktime', m4v: 'video/x-m4v', '3gp': 'video/3gpp', webm: 'video/webm' };
+
+const filesInput = document.getElementById('files');
+const sendBtn = document.getElementById('sendBtn');
+const list = document.getElementById('list');
+const thanks = document.getElementById('thanks');
+let queue = [];
+
+function fileType(f) {
+  if (f.type) return f.type;
+  const ext = (f.name.split('.').pop() || '').toLowerCase();
+  return TYPES[ext] || '';
+}
+
+function sizeText(n) {
+  return n >= 1048576 ? (n / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(n / 1024)) + ' KB';
+}
+
+// The Apps Script upload service. text/plain keeps this a "simple" request: no CORS preflight,
+// and no Google cookies are sent, so the guest's own Google sign-in never gets involved.
+const SERVICE_URL = 'https://script.google.com/macros/s/AKfycbxobo1KJdMkdJLYlECt-RxL8w_lv4iDamhuuw2Xwz2KeMyucmlHnFbs7K2O8rF9TcMtww/exec';
+
+async function call(fn, ...args) {
+  const res = await fetch(SERVICE_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ fn, args }),
+  });
+  if (!res.ok) throw new Error('Πρόβλημα σύνδεσης. Δοκιμάστε ξανά.');
+  const data = await res.json();
+  if (data.error) throw new Error(data.error);
+  return data.result;
+}
+
+function toBase64(blob) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => resolve(String(r.result).split(',')[1] || '');
+    r.onerror = () => reject(r.error);
+    r.readAsDataURL(blob);
+  });
+}
+
+async function retry(task) {
+  for (let attempt = 0; ; attempt++) {
+    try { return await task(); }
+    catch (e) {
+      if (attempt >= 3) throw e;
+      await new Promise(r => setTimeout(r, 2000 * (attempt + 1)));
+    }
+  }
+}
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+let direct = true, directWorked = false;   // fast path is dropped for this visit if the browser can't use it
+
+// PUT one chunk straight to the Drive upload session. XHR (not fetch) for upload progress.
+function putDirect(url, blob, start, total, onBytes) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('PUT', url);
+    xhr.setRequestHeader('Content-Range', 'bytes ' + start + '-' + (start + blob.size - 1) + '/' + total);
+    xhr.upload.onprogress = e => onBytes(e.loaded);
+    xhr.onload = () => {
+      if (xhr.status === 200 || xhr.status === 201) return resolve({ done: true });
+      if (xhr.status === 308) {
+        const range = xhr.getResponseHeader('Range');
+        return resolve(range ? { next: Number(range.split('-')[1]) + 1 } : { ask: true });
+      }
+      reject(new Error('Drive ' + xhr.status));
+    };
+    xhr.onerror = () => reject(new Error('network'));
+    xhr.send(blob);
+  });
+}
+
+async function uploadOne(entry, guest) {
+  const f = entry.file;
+  const show = at => entry.show(Math.min(99, Math.floor(at / f.size * 100)) + '%', at / f.size);
+  const s = await retry(() => call('startUpload', f.name, fileType(f), f.size, guest, location.origin));
+  let start = 0, failures = 0, stalls = 0;
+  for (;;) {
+    try {
+      let res;
+      if (direct) {
+        res = await putDirect(s.url, f.slice(start, start + DIRECT_CHUNK), start, f.size, b => show(start + b));
+        directWorked = true;
+        if (res.ask) res = await call('uploadStatus', s.id); // Drive's Range header was not readable
+      } else {
+        const b64 = await toBase64(f.slice(start, start + RELAY_CHUNK));
+        res = await call('uploadChunk', s.id, start, b64);
+      }
+      failures = 0;
+      if (res.done) return;
+      if (res.next <= start && ++stalls > 3) throw new Error('Η αποστολή κόλλησε. Δοκιμάστε ξανά.');
+      if (res.next > start) stalls = 0;
+      start = res.next;
+      show(start);
+    } catch (e) {
+      if (direct && !directWorked) direct = false; // first direct try failed: switch to the relay, no wait
+      else if (++failures > 4) throw e;
+      else await sleep(2000 * failures);
+      const st = await retry(() => call('uploadStatus', s.id)); // resume exactly where Drive stopped
+      if (st.done) return;
+      start = st.next;
+      show(start);
+    }
+  }
+}
+
+function addRow(file) {
+  const li = document.createElement('li');
+  li.className = 'item';
+  li.innerHTML = '<div class="row"><span class="fname"></span><span class="state"></span></div><div class="bar"><i></i></div>';
+  li.querySelector('.fname').textContent = file.name;
+  const entry = {
+    file,
+    show(text, frac, cls) {
+      li.querySelector('.state').textContent = text;
+      if (frac != null) li.querySelector('.bar i').style.width = (frac * 100) + '%';
+      if (cls) li.classList.add(cls);
+    },
+  };
+  entry.show(sizeText(file.size), 0);
+  list.appendChild(li);
+  return entry;
+}
+
+filesInput.addEventListener('change', () => {
+  thanks.classList.remove('show');
+  for (const f of filesInput.files) {
+    const entry = addRow(f);
+    if (!/^(image|video)\//.test(fileType(f))) entry.show('Μόνο φωτογραφίες/βίντεο', null, 'err');
+    else if (f.size > MAX_FILE) entry.show('Πάνω από 5 GB', null, 'err');
+    else queue.push(entry);
+  }
+  filesInput.value = '';
+  sendBtn.disabled = queue.length === 0;
+});
+
+sendBtn.addEventListener('click', async () => {
+  const guest = document.getElementById('guest').value.trim();
+  const batch = queue; queue = [];
+  sendBtn.disabled = true;
+  sendBtn.textContent = 'Αποστολή…';
+  let failed = 0;
+  for (const entry of batch) {
+    entry.show('0%', 0);
+    try {
+      await uploadOne(entry, guest);
+      entry.show('✓ Στάλθηκε', 1, 'ok');
+    } catch (e) {
+      failed++;
+      entry.show((e && e.message) || 'Σφάλμα', null, 'err');
+      queue.push(entry); // keep it so "Αποστολή" retries it
+    }
+  }
+  sendBtn.textContent = failed ? 'Ξαναδοκιμάστε όσα απέτυχαν' : 'Αποστολή';
+  sendBtn.disabled = queue.length === 0;
+  if (!failed) thanks.classList.add('show');
+});
+</script>
+</body>
+</html>
